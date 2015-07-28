@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *tip18Label;
 @property (weak, nonatomic) IBOutlet UILabel *tip20Label;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentalControl;
+@property (weak, nonatomic) IBOutlet UIView *basicView;
+@property (weak, nonatomic) IBOutlet UIView *advanceView;
 
 - (IBAction)calculate;
 - (IBAction)segmentalSwitch:(UISegmentedControl *)sender;
@@ -36,6 +38,9 @@ NSNumberFormatter *formatter;
     
     // Set the editor as the first focus
     [self.textField becomeFirstResponder];
+    
+    [self.basicView setHidden:NO];
+    [self.advanceView setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,17 +72,17 @@ NSNumberFormatter *formatter;
     switch (self.segmentalControl.selectedSegmentIndex)
     {
         case 0:
-            self.tip10Label.text = @"First selected";
-            [self.tip10Label setHidden:NO];
-            [self.tip20Label setHidden:YES];
+            //self.tip10Label.text = @"First selected";
+            [self.basicView setHidden:NO];
+            [self.advanceView setHidden:YES];
             break;
         case 1:
-            self.tip10Label.text = @"Second Segment selected";
-            [self.tip10Label setHidden:YES];
-            [self.tip20Label setHidden:NO];
+            //self.tip10Label.text = @"Second Segment selected";
+            [self.basicView setHidden:YES];
+            [self.advanceView setHidden:NO];
             break;
         default:
-            break; 
+            break;
     }
 }
 
