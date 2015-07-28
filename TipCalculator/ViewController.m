@@ -5,7 +5,7 @@
 //  Created by Richard Lee on 7/26/15.
 //  Copyright (c) 2015 lifuzu. All rights reserved.
 //
-
+@import Foundation;
 #import "ViewController.h"
 
 @interface ViewController ()
@@ -21,9 +21,19 @@
 
 @implementation ViewController
 
+NSNumberFormatter *formatter;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    // Formatter initialization
+    formatter = [NSNumberFormatter new];
+    [formatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    [formatter setLenient:YES];
+    [formatter setGeneratesDecimalNumbers:YES];
+    
+    // Set the editor as the first focus
+    [self.textField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +42,9 @@
 }
 
 - (IBAction)calculate {
-    float num = [self.textField.text floatValue];
+//    float num = [[self.textField.text componentsSeparatedByString:@"$"][1] floatValue];
+    float num = [[formatter numberFromString:self.textField.text] floatValue];
+
     NSString *tip10Prefix = [self.tip10Label.text componentsSeparatedByString:@":"][0];
     self.tip10Label.text = [NSString stringWithFormat:@"%@: $%0.2f", tip10Prefix, 0.10*num+num];
     
@@ -48,4 +60,39 @@
     NSString *tip20Prefix = [self.tip20Label.text componentsSeparatedByString:@":"][0];
     self.tip20Label.text = [NSString stringWithFormat:@"%@: $%0.2f", tip20Prefix, 0.20*num+num];
 }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *replaced = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSDecimalNumber *amount = (NSDecimalNumber*) [formatter numberFromString:replaced];
+    if (amount == nil) {
+        // Something screwed up the parsing. Probably an alpha character.
+        return NO;
+    }
+    // If the field is empty (the inital case) the number should be shifted to
+    // start in the right most decimal place.
+    short powerOf10 = 0;
+    if ([textField.text isEqualToString:@""]) {
+        powerOf10 = -formatter.maximumFractionDigits;
+    }
+    // If the edit point is to the right of the decimal point we need to do
+    // some shifting.
+    else if (range.location + formatter.maximumFractionDigits >= textField.text.length) {
+        // If there's a range of text selected, it'll delete part of the number
+        // so shift it back to the right.
+        if (range.length) {
+            powerOf10 = -range.length;
+        }
+        // Otherwise they're adding this many characters so shift left.
+        else {
+            powerOf10 = [string length];
+        }
+    }
+    amount = [amount decimalNumberByMultiplyingByPowerOf10:powerOf10];
+    
+    // Replace the value and then cancel this change.
+    textField.text = [formatter stringFromNumber:amount];
+    return NO;
+}
+
 @end
