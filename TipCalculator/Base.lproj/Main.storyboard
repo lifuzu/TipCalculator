@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="$0.00" borderStyle="bezel" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="38" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="dpU-JH-TQa">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" text="$0.00" borderStyle="bezel" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="38" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="dpU-JH-TQa">
                                 <rect key="frame" x="16" y="20" width="568" height="50"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="38"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go"/>
