@@ -5,7 +5,7 @@
 //  Created by Richard Lee on 7/26/15.
 //  Copyright (c) 2015 lifuzu. All rights reserved.
 //
-@import Foundation;
+
 #import "ViewController.h"
 
 @interface ViewController ()
@@ -15,8 +15,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *tip15Label;
 @property (weak, nonatomic) IBOutlet UILabel *tip18Label;
 @property (weak, nonatomic) IBOutlet UILabel *tip20Label;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentalControl;
 
 - (IBAction)calculate;
+- (IBAction)segmentalSwitch:(UISegmentedControl *)sender;
 @end
 
 @implementation ViewController
@@ -60,6 +62,55 @@ NSNumberFormatter *formatter;
     NSString *tip20Prefix = [self.tip20Label.text componentsSeparatedByString:@":"][0];
     self.tip20Label.text = [NSString stringWithFormat:@"%@: $%0.2f", tip20Prefix, 0.20*num+num];
 }
+
+- (IBAction)segmentalSwitch:(UISegmentedControl *)sender {
+    switch (self.segmentalControl.selectedSegmentIndex)
+    {
+        case 0:
+            self.tip10Label.text = @"First selected";
+            [self.tip10Label setHidden:NO];
+            [self.tip20Label setHidden:YES];
+            break;
+        case 1:
+            self.tip10Label.text = @"Second Segment selected";
+            [self.tip10Label setHidden:YES];
+            [self.tip20Label setHidden:NO];
+            break;
+        default:
+            break; 
+    }
+}
+
+//- (IBAction)segmentalSwitch:(UISegmentedControl *)sender {
+//
+//    switch (self.segmentalControl.selectedSegmentIndex)
+//    {
+//        case 0:
+////            self.tip10Label.text = @"First selected";
+//            break;
+//        case 1:
+////            self.tip10Label.text = @"Second Segment selected";
+//            break;
+//        default: 
+//            break; 
+//    }
+    
+    //UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
+//    NSInteger selectedSegment = ((UISegmentedControl *)sender).selectedSegmentIndex;
+//    
+//    if (selectedSegment == 0) {
+//        //toggle the correct view to be visible
+//        //[self.tip10Label setHidden:NO];
+//        //[self.tip20Label setHidden:YES];
+//        self.tip10Label.text = @"First selected";
+//    }
+//    else{
+//        //toggle the correct view to be visible
+//        //[self.tip10Label setHidden:YES];
+//        //[self.tip10Label setHidden:NO];
+//        self.tip10Label.text = @"Second selected";
+//    }
+//}
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {

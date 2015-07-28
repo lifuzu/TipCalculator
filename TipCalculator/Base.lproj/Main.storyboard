@@ -69,6 +69,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gC8-Ni-QH0">
+                                <rect key="frame" x="26" y="96" width="123" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentalSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="sAM-Ex-wXB"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -120,6 +130,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="segmentalControl" destination="gC8-Ni-QH0" id="XaD-di-VyG"/>
                         <outlet property="textField" destination="dpU-JH-TQa" id="ruD-nN-l2f"/>
                         <outlet property="tip10Label" destination="WhG-wO-FEy" id="ufg-Tw-qOT"/>
                         <outlet property="tip12Label" destination="htS-HP-pJz" id="ezT-rR-bQt"/>
