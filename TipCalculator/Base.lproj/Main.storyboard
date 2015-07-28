@@ -136,6 +136,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="560" id="Q0a-Fi-T8e"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="vIe-na-rFt"/>
+                                                </connections>
                                             </slider>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -210,12 +213,14 @@
                         <outlet property="advanceView" destination="eCn-Ne-xKk" id="CBa-a7-NVz"/>
                         <outlet property="basicView" destination="2bO-bD-cI8" id="aep-Yk-m2s"/>
                         <outlet property="segmentalControl" destination="gC8-Ni-QH0" id="XaD-di-VyG"/>
+                        <outlet property="slider" destination="oFx-QP-5f8" id="vY8-AP-Yn6"/>
                         <outlet property="textField" destination="dpU-JH-TQa" id="ruD-nN-l2f"/>
                         <outlet property="tip10Label" destination="WhG-wO-FEy" id="ufg-Tw-qOT"/>
                         <outlet property="tip12Label" destination="htS-HP-pJz" id="ezT-rR-bQt"/>
                         <outlet property="tip15Label" destination="hHf-Js-u3N" id="0te-B3-GJC"/>
                         <outlet property="tip18Label" destination="BBb-a2-Lkj" id="w7G-YW-0ze"/>
                         <outlet property="tip20Label" destination="REY-9o-xxd" id="t6a-wP-lFt"/>
+                        <outlet property="tipFlexLabel" destination="rlv-XQ-PUS" id="UdA-y3-wK4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

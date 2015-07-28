@@ -18,9 +18,12 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentalControl;
 @property (weak, nonatomic) IBOutlet UIView *basicView;
 @property (weak, nonatomic) IBOutlet UIView *advanceView;
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+@property (weak, nonatomic) IBOutlet UILabel *tipFlexLabel;
 
 - (IBAction)calculate;
 - (IBAction)segmentalSwitch:(UISegmentedControl *)sender;
+- (IBAction)sliderChanged:(UISlider *)sender;
 @end
 
 @implementation ViewController
@@ -39,8 +42,15 @@ NSNumberFormatter *formatter;
     // Set the editor as the first focus
     [self.textField becomeFirstResponder];
     
+    // Initialize segmental selection
     [self.basicView setHidden:NO];
     [self.advanceView setHidden:YES];
+    
+    // Initialize slider
+    self.slider.maximumValue = 100;
+    self.slider.minimumValue = 0;
+    self.slider.value = 10;
+    self.tipFlexLabel.text = [NSString stringWithFormat:@"+10%% tips is:"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,6 +76,10 @@ NSNumberFormatter *formatter;
     
     NSString *tip20Prefix = [self.tip20Label.text componentsSeparatedByString:@":"][0];
     self.tip20Label.text = [NSString stringWithFormat:@"%@: $%0.2f", tip20Prefix, 0.20*num+num];
+    
+    long sliderValue = lroundf(self.slider.value);
+//    NSString *tipFlexPrefix = [self.tipFlexLabel.text componentsSeparatedByString:@":"][0];
+    self.tipFlexLabel.text = [NSString stringWithFormat:@"+%ld%% tips is : $%0.2f", sliderValue, sliderValue*num/100+num];
 }
 
 - (IBAction)segmentalSwitch:(UISegmentedControl *)sender {
@@ -84,6 +98,17 @@ NSNumberFormatter *formatter;
         default:
             break;
     }
+}
+
+- (IBAction)sliderChanged:(UISlider *)sender {
+    long sliderValue = lroundf(self.slider.value);
+    [self.slider setValue:sliderValue animated:YES];
+    self.tipFlexLabel.text = [NSString stringWithFormat:@"%f", self.slider.value];
+    
+    float num = [[formatter numberFromString:self.textField.text] floatValue];
+//    NSString *tipFlexSuffix = [self.tipFlexLabel.text componentsSeparatedByString:@"%"][1];
+//    NSString *tipFlexPrefix = [tipFlexSuffix componentsSeparatedByString:@":"][0];
+    self.tipFlexLabel.text = [NSString stringWithFormat:@"+%ld%% tips is : $%0.2f", sliderValue, sliderValue*num/100+num];
 }
 
 //- (IBAction)segmentalSwitch:(UISegmentedControl *)sender {
